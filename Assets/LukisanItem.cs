@@ -13,13 +13,38 @@ public class LukisanItem : MonoBehaviour
     public TMP_Text deskripsi;
     public Image gambarTampilan;
     public GameObject animasi;
+    public bool update;
+    private AudioSource audio;
+    bool flagAudio;
     private void Start()
     {
+        audio = transform.GetChild(0).GetChild(2).GetComponent<AudioSource>();
+        flagAudio = false;
         //updateGambar();
     }
+    private void Update()
+    {
+        if (audio.gameObject.activeSelf)
+        {
+            if (!flagAudio)
+            {
+                OneAudioPlay.instance.StopOtherAudio(audio);
+                flagAudio = true;
+            }
+        }
+        else
+        {
+            if (flagAudio)
+            {
+                flagAudio = false;
+            }
+        }
+    }
+   
     private void OnValidate()
     {
-        updateGambar();
+        //updateGambar();
+        UpdateSound();
     }
     public void updateGambar()
     {
@@ -46,4 +71,20 @@ public class LukisanItem : MonoBehaviour
         }
         
     }
+    public void UpdateSound()
+    {
+        Transform infoTransform = transform.GetChild(0).GetChild(2);
+        
+        AudioSource infoAudio;
+        if (!infoTransform.GetComponent<AudioSource>())
+        {
+            infoAudio = infoTransform.gameObject.AddComponent<AudioSource>();
+
+        }
+        else
+        {
+            infoAudio = infoTransform.GetComponent<AudioSource>();
+        }
+    }
+   
 }

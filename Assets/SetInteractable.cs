@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class SetInteractable : MonoBehaviour
 {
+    public int jumlah;
     public void Interactable(bool value)
     {
         foreach (Transform item in transform)
@@ -20,6 +21,6 @@ public class SetInteractable : MonoBehaviour
         {
             item.GetComponent<Button>().interactable = false;
         }
-        transform.GetChild(value).GetComponent<Button>().interactable = true;
+        transform.GetChild(jumlah-value).GetComponent<Button>().interactable = true;
     }
 }

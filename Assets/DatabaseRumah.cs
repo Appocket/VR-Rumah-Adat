@@ -6,6 +6,7 @@ public class DatabaseRumah : MonoBehaviour
 {
     public TextAsset dataRaw;
     public List<Sprite> gambar;
+    public List<AudioClip> audio;
     public bool generate;
     public List<DataProvinsi> Data;
     private void OnValidate()

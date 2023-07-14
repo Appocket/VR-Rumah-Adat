@@ -13,6 +13,7 @@ public class LiftLocomotor : MonoBehaviour
     public float elapsedTime;
     public Vector3 progressLift;
 
+    public AudioSource liftSound, liftSampai;
 
     float tinggiPlayer = 0;
     public Transform player;
@@ -33,6 +34,7 @@ public class LiftLocomotor : MonoBehaviour
         progressLift = transform.position;
         elapsedTime = -1f;
         gantiLantai = true;
+        liftSound.Play();
     }
 
     // Update is called once per frame
@@ -53,6 +55,8 @@ public class LiftLocomotor : MonoBehaviour
                     pintu.Play("buka");
                     tombolInteractable.Interactable(false);
                     gantiLantai = false;
+                    liftSampai.Play();
+                    liftSound.Stop();
                 }
             }
             else

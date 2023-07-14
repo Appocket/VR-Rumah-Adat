@@ -9,6 +9,7 @@ using UnityEngine.EventSystems;
 public class GazeButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public Image loadingImage;
+    public AudioSource audio;
     public float loadingTime = 1.5f;
     private float elapsedTime;
 
@@ -22,6 +23,7 @@ public class GazeButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         {
             loadingImage = GameObject.FindGameObjectWithTag("LoadingClick").GetComponent<Image>();
             loadingImage.enabled = false;
+            audio = loadingImage.GetComponent<AudioSource>();
         }
         elapsedTime = 0;
         loadingClick = false;
@@ -52,6 +54,7 @@ public class GazeButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             loadingClick = true;
             elapsedTime = 0;
             loadingImage.enabled = true;
+            audio.Play();
             onEnter.Invoke();
         }
     }
@@ -62,6 +65,7 @@ public class GazeButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             loadingClick = false;
             elapsedTime = 0;
             loadingImage.enabled = false;
+            audio.Stop();
             onExit.Invoke();
         }
     }
@@ -73,6 +77,7 @@ public class GazeButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             {
                 loadingClick = false;
                 loadingImage.enabled = false;
+                audio.Stop();
                 onClick.Invoke();
             }
             elapsedTime += Time.deltaTime;
